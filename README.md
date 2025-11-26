@@ -1,66 +1,53 @@
-🛠️ Klystron Cavity Interpolator
+# 🛠️ Klystron Cavity Interpolator
 
 A simple desktop application built on Windows Forms (WinForms) for calculating the optimal tuning cavity settings for a Klystron tube using linear interpolation between two known calibration points.
 
-✨ Features
+## ✨ Features
 
-    Linear Interpolation: Calculates 6 interpolated cavity settings (C1 through C6) based on two input calibration frequencies and a target Transmit Frequency.
+* **Linear Interpolation:** Calculates 6 interpolated cavity settings (C1 through C6) based on two input calibration frequencies and a target Transmit Frequency.
+* **Structured Export:** Exports the complete calibration data (Lower, Upper, and Interpolated settings) to a clean, formatted **HTML report** for easy record-keeping and sharing.
+* **Printing Support:** Provides a **Print Preview** and printing functionality for generating hard copies of the structured report.
+* **Fixed Interface:** The window is non-resizable, ensuring a consistent layout and user experience.
+* **User Assistance:** Includes simple **Usage** and **About** menu items for quick reference on operation and version information.
 
-    Structured Export: Exports the complete calibration data (Lower, Upper, and Interpolated settings) to a clean, formatted HTML report for easy record-keeping and sharing.
-
-    Printing Support: Provides a Print Preview and printing functionality for generating hard copies of the structured report.
-
-    Fixed Interface: The window is non-resizable, ensuring a consistent layout and user experience.
-
-    User Assistance: Includes simple Usage and About menu items for quick reference on operation and version information.
-
-🚀 How to Use
+## 🚀 How to Use
 
 The application follows a simple process to determine the optimal tuning settings.
 
-    Input Calibration Data:
+1.  **Input Calibration Data:**
+    * Enter the **Lower Frequency** ($F_L$) and its corresponding cavity settings into the **C1L** through **C6L** columns.
+    * Enter the **Upper Frequency** ($F_U$) and its corresponding cavity settings into the **C1U** through **C6U** columns.
+    * Enter the desired **Transmit Frequency** ($F_{XMT}$) into the designated input box.
 
-        Enter the Lower Frequency (FL​) and its corresponding cavity settings into the C1L through C6L columns.
+2.  **Calculate Settings:**
+    * Navigate to the **Actions** menu and select **Interpolate**.
+    * The calculated optimal settings will appear in the **C1-C6** (Output) column, rounded to one decimal place.
 
-        Enter the Upper Frequency (FU​) and its corresponding cavity settings into the C1U through C6U columns.
+3.  **Save or Print Report:**
+    * **To Export:** Go to **File** > **Export Results...** to save the clean HTML report file.
+    * **To Print:** Go to **File** > **Print...** to view the Print Preview and print the structured report.
 
-        Enter the desired Transmit Frequency (FXMT​) into the designated input box.
+## ⚙️ Technical Details
 
-    Calculate Settings:
+### Interpolation Formula
 
-        Navigate to the Actions menu and select Interpolate.
+The core of the application uses the standard linear interpolation formula applied independently to each of the six cavity settings ($S$):
 
-        The calculated optimal settings will appear in the C1-C6 (Output) column, rounded to one decimal place.
-
-    Save or Print Report:
-
-        To Export: Go to File > Export Results... to save the clean HTML report file.
-
-        To Print: Go to File > Print... to view the Print Preview and print the structured report.
-
-⚙️ Technical Details
-
-Interpolation Formula
-
-The core of the application uses the standard linear interpolation formula applied independently to each of the six cavity settings (S):
-SX​=SL​+(FXMT​−FL​)⋅FU​−FL​SU​−SL​​
+$$S_{X} = S_{L} + (F_{XMT} - F_{L}) \cdot \frac{S_{U} - S_{L}}{F_{U} - F_{L}}$$
 
 Where:
+* $S_X$ = Interpolated Cavity Setting (Output)
+* $S_L$ = Lower Cavity Setting (Input)
+* $S_U$ = Upper Cavity Setting (Input)
+* $F_{XMT}$ = Transmit Frequency (Target)
+* $F_L$ = Lower Frequency (Input)
+* $F_U$ = Upper Frequency (Input)
 
-    SX​ = Interpolated Cavity Setting (Output)
 
-    SL​ = Lower Cavity Setting (Input)
+[Image of linear interpolation calculation graph]
 
-    SU​ = Upper Cavity Setting (Input)
 
-    FXMT​ = Transmit Frequency (Target)
+### Project Stack
 
-    FL​ = Lower Frequency (Input)
-
-    FU​ = Upper Frequency (Input)
-
-Project Stack
-
-    Framework: .NET (Windows Forms)
-
-    Language: C#
+* **Framework:** .NET (Windows Forms)
+* **Language:** C#
